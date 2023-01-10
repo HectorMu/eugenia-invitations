@@ -27,7 +27,8 @@
   "homepage": "https://github.com/HectorMu/react-templates#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "framer-motion": "^8.4.0"
+    "framer-motion": "^8.4.0",
+    "react-qr-code": "^2.0.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
