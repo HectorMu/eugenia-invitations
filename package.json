@@ -8,7 +8,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build:app": "npm run build --workspace=app",
+    "build:app": "npm run build --emptyOutDir --workspace=app ",
     "start:app": "npm run dev --workspace=app",
     "start:api": "npm run dev --workspace=api",
     "dev": "start npm run start:api && start npm run start:app",
