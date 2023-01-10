@@ -6,7 +6,7 @@ const path = require("path");
 const app = express();
 
 //Initialazing database connection
-const initDatabase = require("./database");
+require("./database");
 
 //Using middlewares
 app.use(cors());
@@ -28,7 +28,7 @@ app.get("/*", (req, res) => {
     }
   });
 });
-console.log(process.env);
+
 //Initialazing the server
 let port = process.env.PORT || 4000;
 app.listen(port, () => {
