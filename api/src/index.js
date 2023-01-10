@@ -28,7 +28,7 @@ app.get("/*", (req, res) => {
     }
   });
 });
-
+console.log(process.env);
 //Initialazing the server
 let port = process.env.PORT || 4000;
 app.listen(port, () => {
