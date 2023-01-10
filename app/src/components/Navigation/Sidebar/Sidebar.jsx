@@ -2,13 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ setIsActive, isActive }) => {
-  //const { user } = useSession();
-
-  //   if (user === null) {
-  //     return <></>;
-  //   }
-
+const Sidebar = ({ isActive, toggleSideBar }) => {
   return (
     <aside className={`sidebar ${isActive ? `active` : ``}`}>
       <nav className="menu ">

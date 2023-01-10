@@ -1,8 +1,3 @@
-import React, { useContext } from "react";
-import { Session } from "../context/SessionContextProvider";
+import { useSelector } from "react-redux";
 
-const useSession = () => {
-  return useContext(Session);
-};
-
-export default useSession;
+export const useSession = () => useSelector((state) => state.session.user);

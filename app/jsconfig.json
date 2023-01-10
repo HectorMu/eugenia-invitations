@@ -11,7 +11,8 @@
       "@/routes/*": ["./routes/*"],
       "@/hooks/*": ["./hooks/*"],
       "@/helpers/*": ["./helpers/*"],
-      "@/services/*": ["./services/*"]
+      "@/services/*": ["./services/*"],
+      "@/store/*": ["./store/*"]
     }
   }
 }

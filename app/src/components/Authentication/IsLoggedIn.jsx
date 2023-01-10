@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 
-import useSession from "../../hooks/useSession";
+import { useSession } from "@/hooks/useSession";
 
 const IsLoggedIn = ({ view: View }) => {
-  const { user } = useSession();
+  const user = useSession();
+
   if (user !== null) return <View />;
   return <Navigate to="/login" replace={true} />;
 };

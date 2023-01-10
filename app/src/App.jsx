@@ -11,7 +11,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<IsAlreadyLogged view={Index} />} /> */}
           {/* <Route path="/home" element={<IsLoggedIn view={Home} />} /> */}
-          {AppRoutes.dev.map((route) => (
+          {AppRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Routes>

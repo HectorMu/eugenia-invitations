@@ -1,59 +1,24 @@
 import IsLoggedIn from "@/components/Authentication/IsLoggedIn";
 import authRoutes from "./auth";
 
-import Index from "@/pages/Index";
-import Home from "@/pages/Home";
-import About from "@/pages/About";
+import { Home } from "@/pages/Home";
 
-import NotFound from "@/pages/status/NotFound";
+import { NotFound } from "@/pages/status";
 
-const index = {
-  dev: [
-    {
-      path: "/",
-      element: <Index />,
-    },
-    {
-      path: "/dashboard",
-      element: <Home />,
-    },
-    {
-      path: "/About",
-      element: <About />,
-    },
-    //all app routes
-    ...authRoutes.dev,
+const index = [
+  {
+    path: "/",
+    element: <IsLoggedIn view={Home} />,
+  },
 
-    //not found
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ],
+  //All app routes
+  ...authRoutes,
 
-  //Protected for production
-  production: [
-    {
-      path: "/",
-      element: <IsLoggedIn view={Index} />,
-    },
-    {
-      path: "/dashboard",
-      element: <IsLoggedIn view={Home} />,
-    },
-    {
-      path: "/about",
-      element: <IsLoggedIn view={About} />,
-    },
-    //All app routes
-    ...authRoutes.production,
-
-    //Not found route
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ],
-};
+  //Not found route
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+];
 
 export default index;
