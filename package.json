@@ -27,7 +27,7 @@
   "homepage": "https://github.com/HectorMu/react-templates#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "sweetalert2": "^11.4.4"
+    "framer-motion": "^8.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
