@@ -1,13 +1,3 @@
-:root {
-  --sidebar-bg-color: #e6e7e9;
-  --heading-font-color: rgb(0, 0, 0);
-  --item-font-color: rgb(54, 54, 54);
-  --item-font-hover-color: rgb(153, 151, 151);
-  --divider-color: rgb(68, 68, 68);
-  --item-active-font-color: rgb(84, 84, 226);
-  --item-active-border-color: black;
-}
-
 .sidebar {
   flex: 1 1 0;
   max-width: 200px;
@@ -44,11 +34,12 @@
 }
 .sidebar-divider {
   width: 90%;
-  color: var(--divider-color);
 }
 
 .sidebar .menu .menu-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 15px;
   padding-left: 1.2em;
   padding-right: 0.6em;
   padding-top: 0.6em;
