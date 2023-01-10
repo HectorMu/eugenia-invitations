@@ -7,14 +7,19 @@ const controller = {};
 controller.Login = async (req, res) => {
   const { email, password } = req.body;
   try {
+    if (!helpers.isEmail(email)) {
+      return res.status(400).json({
+        message: "The provided email is not valid.",
+      });
+    }
+
     const results = await connection.query(
-      `select * from users where email = ? `,
+      `select * from user where email = ? `,
       [email]
     );
     if (!results.length > 0)
       return res.status(400).json({
-        status: false,
-        statusText: "Wrong credentials, check it out.",
+        message: "Wrong credentials, check it out.",
       });
 
     const user = results[0];
@@ -25,8 +30,7 @@ controller.Login = async (req, res) => {
 
     if (!passwordComparationResult)
       return res.status(400).json({
-        status: false,
-        statusText: "Wrong credentials, check it out.",
+        message: "Wrong credentials, check it out.",
       });
 
     const serializedUser = {
@@ -48,57 +52,58 @@ controller.Login = async (req, res) => {
     };
 
     res.status(200).json({
-      status: true,
-      statusText: "User logged",
+      message: "Success",
       SessionData,
     });
   } catch (error) {
     console.log(error);
     res
-      .status(200)
+      .status(400)
       .json({ status: false, statusText: "Something wen't wrong." });
   }
 };
 
 controller.Signup = async (req, res) => {
-  const { username, firstname, lastname, email, password } = req.body;
+  const { email } = req.body;
   try {
+    if (!helpers.isEmail(email)) {
+      return res.status(400).json({
+        message: "The provided email is not valid.",
+      });
+    }
+
     const results = await connection.query(
-      `select * from users where email = ? `,
+      `select * from user where email = ? `,
       [email]
     );
-    if (results.length > 0)
-      return res.json({
-        status: false,
-        statusText:
-          "An account is using this email already, try another email.",
+    if (results.length > 0) {
+      return res.status(400).json({
+        message: "An account is using this email already, try another email.",
       });
+    }
 
     const newUser = {
-      username,
-      firstname,
-      lastname,
-      email,
-      password,
+      ...req.body,
     };
 
     newUser.password = await helpers.encryptPassword(newUser.password);
-    await connection.query("insert into users set ?", [newUser]);
-    res.status(200).json({ status: true, statusText: "userRegistered" });
+
+    await connection.query("insert into user set ?", [newUser]);
+
+    res.status(200).json({ message: "User registered" });
   } catch (error) {
     console.log(error);
-    res
-      .status(200)
-      .json({ status: false, statusText: "Something wen't wrong." });
+    res.status(400).json({ message: "Something wen't wrong.", error });
   }
 };
 
 controller.sendRecoverEmail = async (req, res) => {
   const { email } = req.body;
-  const results = await connection.query(
-    "select * from users where email = ?",
-    [email]
-  );
+
+  const results = await connection.query("select * from user where email = ?", [
+    email,
+  ]);
+  console.log(results);
   if (results.length > 0) {
     nodeMailer.Send(req, res);
   } else {

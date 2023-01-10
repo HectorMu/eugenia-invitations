@@ -17,10 +17,9 @@ Email.Send = async (req, res) => {
   //creating the user token
   const { email } = req.body;
 
-  const user = await connection.query("select * from users where email = ?", [
+  const user = await connection.query("select * from user where email = ?", [
     email,
   ]);
-  // console.log(user)
   const payload = {
     email: user[0].email,
     id: user[0].iduser,
@@ -28,10 +27,8 @@ Email.Send = async (req, res) => {
   const token = jwt.sign(payload, process.env.EMAIL_TOKEN_SECRET, {
     expiresIn: "15m",
   });
-  //production
-  const link = `https://reactnodenotesv2.herokuapp.com/reset/${token}`;
-  //dev
-  //const link = `http://localhost:3000/reset/${token}`;
+
+  const link = `${process.env.RECOVER_LINK_DOMAIN}/reset/${token}`;
 
   let emailOptions = {
     from: process.env.MAILER_EMAIL,
@@ -41,7 +38,11 @@ Email.Send = async (req, res) => {
   };
   transporter.sendMail(emailOptions, (err, info) => {
     if (err) {
-      return res.json({ status: false, statusText: "Something wen't wrong." });
+      return res.status(400).json({
+        status: false,
+        statusText: "Something wen't wrong.",
+        err,
+      });
     } else {
       res.json({
         status: true,
