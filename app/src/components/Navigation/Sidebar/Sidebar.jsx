@@ -18,30 +18,16 @@ const Sidebar = ({ setIsActive, isActive }) => {
         </NavLink>
         <hr className="c-sidebar-divider" />
         <div className="heading">
-          <p>Usuarios</p>
+          <p>Item 1</p>
         </div>
         <NavLink to="/accounts" className="menu-item">
-          <i className="fas fa-users"></i> <span>Cuentas</span>
+          <i className="fas fa-users"></i> <span>Sub item 1</span>
         </NavLink>
         <NavLink to="/companies" className="menu-item">
-          <i className="fas fa-building"></i> <span>Empresas</span>
+          <i className="fas fa-building"></i> <span>Sub item 2</span>
         </NavLink>
         <NavLink to="/graduates" className="menu-item">
-          <i className="fas fa-user-graduate"></i> <span>Egresados</span>
-        </NavLink>
-        <hr className="c-sidebar-divider" />
-        <div className="heading">
-          <p>Bolsa de trabajo</p>
-        </div>
-        <NavLink to="/jobbank" className="menu-item">
-          <i className="fas fa-envelope"></i> <span>Postulaciones</span>
-        </NavLink>{" "}
-        <hr className="c-sidebar-divider" />
-        <div className="heading">
-          <p>Encuestas</p>
-        </div>
-        <NavLink to="/surveys/reports/" className="menu-item">
-          <i className="fas fa-print"></i> <span>Reportes</span>
+          <i className="fas fa-user-graduate"></i> <span>Sub item 3</span>
         </NavLink>
         <hr className="c-sidebar-divider" />
       </nav>
