@@ -3,79 +3,29 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Input from "@/components/Input";
 import Logo from "@/components/Logo";
-import useForm from "@/hooks/useForm";
-import useRouter from "@/hooks/useRouter";
-import {
-  ChangePasswordWithRecoverTokenService,
-  VerifyRecoverAccountTokenService,
-} from "@/services/auth.service";
-import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
-import { toast } from "react-hot-toast";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { usePasswordReset } from "./hooks/usePasswordReset";
 
 const PasswordReset = () => {
-  const { params, navigate } = useRouter();
+  const {
+    errors,
+    handleSubmit,
+    hasErrors,
+    register,
+    verifyTokenResponse,
+    verifyTokenStatus,
+  } = usePasswordReset();
 
-  const { form, register, errors, hasErrors } = useForm(
-    {
-      password: "",
-      confirmPassword: "",
-    },
-    {
-      validate: (fields) => {
-        const errors = {};
-
-        if (Object.values(fields).includes("")) {
-          errors.required = "All fields are required";
-        } else if (fields.password !== fields.confirmPassword) {
-          errors.required = "Passwords don't match";
-        }
-        return errors;
-      },
-    }
-  );
-
-  const { status, data } = useQuery({
-    queryFn: () => VerifyRecoverAccountTokenService(params?.token),
-    queryKey: ["verify-token-", params?.token],
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const tLoading = toast.loading("Loading...");
-    try {
-      await ChangePasswordWithRecoverTokenService(params?.token, form.password);
-
-      toast.success("Password changed", {
-        id: tLoading,
-      });
-      navigate("/login");
-    } catch (error) {
-      toast.error(error.message, {
-        id: tLoading,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (data && !data?.status) {
-      navigate("/login");
-      toast.error("Recover link expired");
-    }
-  }, [data]);
-
-  console.log(form);
   return (
     <AuthLayout>
       <Logo />
       <Card>
-        {status === "loading" ? (
+        {verifyTokenStatus === "loading" ? (
           <h1 className="text-center font-medium text-2xl">
             We are validating your link...
           </h1>
-        ) : status === "error" ? (
+        ) : verifyTokenStatus === "error" ? (
           <h1 className="text-center font-medium text-2xl">
             We can't validate your link...
           </h1>

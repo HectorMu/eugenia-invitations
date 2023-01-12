@@ -3,14 +3,9 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Input from "@/components/Input";
 import Logo from "@/components/Logo";
-import useForm from "@/hooks/useForm";
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { RecoverAccountService } from "@/services/auth.service";
-import useRouter from "@/hooks/useRouter";
 import { useRecover } from "./hooks/useRecover";
 
 const AccountRecover = () => {

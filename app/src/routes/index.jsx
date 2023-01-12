@@ -3,7 +3,7 @@ import authRoutes from "./auth";
 
 import { Home } from "@/pages/Home";
 
-import { NotFound } from "@/pages/status";
+import { NotFound } from "@/pages/Status";
 
 const index = [
   {

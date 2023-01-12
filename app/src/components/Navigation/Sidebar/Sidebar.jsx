@@ -16,7 +16,7 @@ const Sidebar = ({ isActive }) => {
         <div className="heading">
           <p>Menu</p>
         </div>
-        <NavLink to="/accounts" className="menu-item">
+        <NavLink to="/" className="menu-item">
           <AiOutlineSend className="text-white" color="white" />{" "}
           <span>Home</span>
         </NavLink>
