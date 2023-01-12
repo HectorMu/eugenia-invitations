@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -8,9 +8,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 
+const container = document.getElementById("app");
+const root = createRoot(container);
+
 const client = new QueryClient();
 
-ReactDOM.render(
+root.render(
   <QueryClientProvider client={client}>
     <Provider store={store}>
       <Router>
@@ -18,6 +21,5 @@ ReactDOM.render(
       </Router>
     </Provider>
     <ReactQueryDevtools />
-  </QueryClientProvider>,
-  document.getElementById("root")
+  </QueryClientProvider>
 );
