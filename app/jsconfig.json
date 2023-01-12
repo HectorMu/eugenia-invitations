@@ -12,6 +12,7 @@
       "@/hooks/*": ["./hooks/*"],
       "@/helpers/*": ["./helpers/*"],
       "@/services/*": ["./services/*"],
+      "@/modals/*": ["./modals/*"],
       "@/store/*": ["./store/*"]
     }
   }
