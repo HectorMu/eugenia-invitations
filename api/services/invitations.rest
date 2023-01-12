@@ -1,31 +1,35 @@
 ###
-GET http://localhost:4000/api/departments 
+GET http://localhost:4000/api/invitations 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
 
 ###
-GET http://localhost:4000/api/departments/13243
+GET http://localhost:4000/api/invitations/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
 
 ###
-POST http://localhost:4000/api/departments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
-Content-Type: application/json
-
-{
-    "name":"NEW"   
-}
-
-###
-PUT http://localhost:4000/api/departments/5
+POST http://localhost:4000/api/invitations
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
 Content-Type: application/json
 
 {
-    "name":"NEW test update"   
+    "host_name":"Pedro Martinez",
+    "arrival_date":"2024/23/09",
+    "expiration_date":"2024/24/09" 
 }
 
 ###
-DELETE  http://localhost:4000/api/departments/5
+PUT http://localhost:4000/api/invitations/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
+Content-Type: application/json
+
+{
+    "host_name":"Pedro Martinez",
+    "arrival_date":"2024/23/09",
+    "expiration_date":"2024/24/09" 
+}
+
+###
+DELETE  http://localhost:4000/api/invitations/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibGFzdG5hbWUiOiJEb2UiLCJlbWFpbCI6IkpvaF9Eb2VAZ21haWwuY29tIiwiaWF0IjoxNjczMzgxMzEyfQ.r2CbiE0jEaelfLyk8n4YbaESlYgqA_N239O1hhQQWxQ
 Content-Type: application/json
 

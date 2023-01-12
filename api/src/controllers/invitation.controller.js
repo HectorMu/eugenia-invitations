@@ -2,15 +2,20 @@ const connection = require("../database");
 const controller = {};
 
 controller.ListAll = async (req, res) => {
+  const { id: claimerId } = req.claims;
   try {
-    const departments = await connection.query("SELECT * from department");
+    const invitation = await connection.query(
+      "SELECT * from invitation where fk_user_owner = ?",
+      [claimerId]
+    );
 
-    return res.status(200).json(departments);
+    return res.status(200).json(invitation);
   } catch (error) {
     return res.status(400).json({ message: "Something wen't wrong", error });
   }
 };
 controller.ListOne = async (req, res) => {
+  const { id: claimerId } = req.claims;
   const { id } = req.params;
 
   if (!id) {
@@ -20,12 +25,12 @@ controller.ListOne = async (req, res) => {
   }
 
   try {
-    const departments = await connection.query(
-      "SELECT * from department where id = ?",
-      [id]
+    const invitation = await connection.query(
+      "SELECT * from invitation where id = ? and fk_user_owner = ?",
+      [id, claimerId]
     );
-    if (departments.length > 0) {
-      return res.status(200).json(departments[0]);
+    if (invitation.length > 0) {
+      return res.status(200).json(invitation[0]);
     }
     return res.status(200).json({});
   } catch (error) {
@@ -34,11 +39,14 @@ controller.ListOne = async (req, res) => {
 };
 
 controller.Save = async (req, res) => {
-  const newDeparment = req.body;
+  const { id: claimerId } = req.claims;
+  const newInvitation = req.body;
+  newInvitation.fk_user_owner = claimerId;
+
   try {
     const insertResult = await connection.query(
-      "insert into department set ?",
-      [newDeparment]
+      "insert into invitation set ?",
+      [newInvitation]
     );
 
     return res.status(200).json(insertResult);
@@ -48,7 +56,8 @@ controller.Save = async (req, res) => {
 };
 
 controller.Update = async (req, res) => {
-  const newDeparment = req.body;
+  const { id: claimerId } = req.claims;
+  const newInvitation = req.body;
   const { id } = req.params;
   if (!id) {
     return res
@@ -57,8 +66,8 @@ controller.Update = async (req, res) => {
   }
   try {
     const updateResult = await connection.query(
-      "update department set ? where id = ?",
-      [newDeparment, id]
+      "update invitation set ? where id = ? and fk_user_owner = ?",
+      [newInvitation, id, claimerId]
     );
 
     if (updateResult.changedRows === 0) {
@@ -72,6 +81,7 @@ controller.Update = async (req, res) => {
 };
 
 controller.Delete = async (req, res) => {
+  const { id: claimerId } = req.claims;
   const { id } = req.params;
   if (!id) {
     return res
@@ -80,9 +90,10 @@ controller.Delete = async (req, res) => {
   }
   try {
     const deleteResult = await connection.query(
-      "delete from  department where id = ?",
-      [id]
+      "delete from invitation where id = ? and fk_user_owner =?",
+      [id, claimerId]
     );
+
     if (deleteResult.affectedRows === 0) {
       return res.status(400).json({ message: "Resource not exists" });
     }
