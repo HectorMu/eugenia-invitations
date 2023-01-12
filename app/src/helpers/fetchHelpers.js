@@ -1,6 +1,10 @@
-const helpers = {};
+export const getAndSetAccessToken = () => {
+  const user = JSON.parse(window.localStorage.getItem("APP_SESSION"));
 
-helpers.postConfig = (data) => {
+  return `Bearer ${user.AccessToken}`;
+};
+
+export const postConfig = (data) => {
   return {
     method: "POST",
     headers: {
@@ -10,13 +14,13 @@ helpers.postConfig = (data) => {
   };
 };
 
-helpers.authPostConfig = (data) => {
+export const authPostConfig = (data) => {
   if (data) {
     return {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: helpers.getAndSetAccessToken(),
+        Authorization: getAndSetAccessToken(),
       },
       body: JSON.stringify(data),
     };
@@ -25,18 +29,18 @@ helpers.authPostConfig = (data) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: helpers.getAndSetAccessToken(),
+      Authorization: getAndSetAccessToken(),
     },
   };
 };
 
-helpers.authPutConfig = (data) => {
+export const authPutConfig = (data) => {
   if (data) {
     return {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: helpers.getAndSetAccessToken(),
+        Authorization: getAndSetAccessToken(),
       },
       body: JSON.stringify(data),
     };
@@ -45,38 +49,32 @@ helpers.authPutConfig = (data) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: helpers.getAndSetAccessToken(),
+      Authorization: getAndSetAccessToken(),
     },
   };
 };
 
-helpers.authGetConfig = () => {
+export const authGetConfig = () => {
   return {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: helpers.getAndSetAccessToken(),
+      Authorization: getAndSetAccessToken(),
     },
   };
 };
 
-helpers.authDeleteConfig = () => {
+export const authDeleteConfig = () => {
   return {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: helpers.getAndSetAccessToken(),
+      Authorization: getAndSetAccessToken(),
     },
   };
 };
 
-helpers.getAndSetAccessToken = () => {
-  const user = JSON.parse(window.localStorage.getItem("APP_SESSION"));
-
-  return `Bearer ${user.AccessToken}`;
-};
-
-helpers.ApiFetchError = (errorMessage, customText) => {
+export const ApiFetchError = (errorMessage, customText) => {
   if (!window.navigator.onLine) {
     return {
       status: false,
@@ -102,5 +100,3 @@ helpers.ApiFetchError = (errorMessage, customText) => {
     }`,
   };
 };
-
-export default helpers;

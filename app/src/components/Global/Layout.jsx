@@ -16,7 +16,9 @@ export const Layout = ({ children }) => {
 
   return (
     <>
-      <AnimatePresence>{isModalOpen && <Modal />}</AnimatePresence>
+      <AnimatePresence>
+        {isModalOpen && <Modal toggle={toggleModal} />}
+      </AnimatePresence>
       <Navbar
         isActive={isActive}
         toggleSideBar={toggleSideBar}

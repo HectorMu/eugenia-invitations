@@ -4,10 +4,10 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 
-const Navbar = ({ isActive, toggleSideBar, toggleModal }) => {
+const Navbar = ({ toggleSideBar, toggleModal }) => {
   const user = useSession();
   return (
-    <nav className="w-full z-50 py-2 fixed bg-gray-600 dark:bg-gray-900 text-white shadow-sm">
+    <nav className="w-full z-40 py-2 fixed bg-gray-600 dark:bg-gray-900 text-white shadow-sm">
       <div className="flex justify-between w-11/12 mx-auto items-center">
         <Link to={"/"} className="flex items-center gap-2 hover:cursor-pointer">
           <Logo className="text-black  mb-0 p-[5px] text-[19px]" />
