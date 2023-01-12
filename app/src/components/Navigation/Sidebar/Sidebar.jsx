@@ -1,9 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineSend } from "react-icons/ai";
+import { BiExit } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { logout as logoutAction } from "@/store/slices/SessionSlice";
 import "./Sidebar.css";
 
-const Sidebar = ({ isActive, toggleSideBar }) => {
+const Sidebar = ({ isActive }) => {
+  const dispatch = useDispatch();
   return (
     <aside
       className={`sidebar bg-slate-900 text-white ${isActive ? `active` : ``}`}
@@ -16,9 +20,13 @@ const Sidebar = ({ isActive, toggleSideBar }) => {
           <AiOutlineSend className="text-white" color="white" />{" "}
           <span>Home</span>
         </NavLink>
-        <NavLink to="/companies" className="menu-item">
-          <AiOutlineSend /> <span>Sended invitations</span>
-        </NavLink>
+
+        <button
+          onClick={() => dispatch(logoutAction())}
+          className="menu-item top-[100%]"
+        >
+          <BiExit /> <span>Logout</span>
+        </button>
       </nav>
     </aside>
   );

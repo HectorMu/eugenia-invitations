@@ -12,7 +12,7 @@ module.exports = (link) => {
                                          <br>
                                          <center> 
                                              <a  style="text-decoration: none;color: 
-                                             #fff;background-color: gray;border-color: gray;
+                                             #fff;background-color: gray; border-color: gray;
                                              display: inline-block;
                                              margin-bottom: 0;font-weight: 400;
                                              text-align: center;white-space: nowrap;
@@ -30,7 +30,7 @@ module.exports = (link) => {
                                                 If you didn't request a password change, you can ignore this email.
                                                  
                                                  <br>
-                                                 Greetings, Héctor Muñoz, Node Notes CEO.
+                                                 Greetings, Eugenia.
                                              </p>
                                       </p>  
                                  </div>

@@ -35,8 +35,7 @@ controller.Login = async (req, res) => {
 
     const serializedUser = {
       id: user.id,
-      username: user.username,
-      firstname: user.firstname,
+      name: user.name,
       lastname: user.lastname,
       email: user.email,
     };
@@ -155,26 +154,27 @@ controller.ResetPassword = async (req, res) => {
   const { ResetToken } = req.params;
   const { password } = req.body;
 
+  console.log(req.body);
   try {
     const decodedResetToken = jwt.verify(
       ResetToken,
       process.env.EMAIL_TOKEN_SECRET
     );
 
-    const { id } = decodedResetToken;
+    const { email } = decodedResetToken;
 
     const hashedPassword = await helpers.encryptPassword(password);
 
-    await connection.query("update users set password = ? where id = ?", [
+    await connection.query("update user set password = ? where email = ?", [
       hashedPassword,
-      id,
+      email,
     ]);
 
-    res.status(200).json({ status: true, statusText: "Password changed" });
+    res.status(200).json({ message: "Password changed" });
   } catch (error) {
-    res.status(200).json({
-      status: false,
-      statusText: "Something wen't wrong, try again later.",
+    res.status(400).json({
+      error,
+      message: "Something wen't wrong, try again later.",
     });
   }
 };

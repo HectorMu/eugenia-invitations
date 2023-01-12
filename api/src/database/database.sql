@@ -21,12 +21,11 @@ FOREIGN KEY (fk_department) REFERENCES department (id));
 
 CREATE TABLE invitation(
 id INT PRIMARY KEY AUTO_INCREMENT,
-fk_host INT,
-fk_guest INT,
-FOREIGN KEY (fk_host) REFERENCES USER (id),
-FOREIGN KEY (fk_guest) REFERENCES USER (id),
+host_name TEXT,
 arrival_date TEXT,
-expiration_date TEXT
+expiration_date TEXT,
+fk_user_owner INT,
+foreign key (fk_user_owner) references user (id)
 );
 
 

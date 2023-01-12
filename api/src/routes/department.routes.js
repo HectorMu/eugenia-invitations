@@ -4,10 +4,10 @@ const verifyToken = require("../middlewares/verifyToken");
 
 const controller = require("../controllers/department.controller");
 
-router.get("/", verifyToken, controller.ListAll);
-router.get("/:id", verifyToken, controller.ListOne);
-router.post("/", verifyToken, controller.Save);
-router.delete("/:id", verifyToken, controller.Delete);
-router.put("/:id", verifyToken, controller.Update);
+router.get("/", controller.ListAll);
+router.get("/:id", controller.ListOne);
+router.post("/", controller.Save);
+router.delete("/:id", controller.Delete);
+router.put("/:id", controller.Update);
 
 module.exports = router;

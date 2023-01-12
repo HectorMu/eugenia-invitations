@@ -28,7 +28,7 @@ Email.Send = async (req, res) => {
     expiresIn: "15m",
   });
 
-  const link = `${process.env.RECOVER_LINK_DOMAIN}/reset/${token}`;
+  const link = `${process.env.RECOVER_LINK_DOMAIN}/reset/${token}/`;
 
   let emailOptions = {
     from: process.env.MAILER_EMAIL,
