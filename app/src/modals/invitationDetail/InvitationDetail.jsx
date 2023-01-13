@@ -109,6 +109,7 @@ const InvitationDetail = ({ toggle, invitation: localInvitation }) => {
       await handleInvitationUpdate(form);
       queryClient.invalidateQueries("invitation-detail-", localInvitation.id);
       queryClient.invalidateQueries("user-invitations");
+      toggleEditing();
     } catch (error) {
       console.error(error);
       toast.error(
