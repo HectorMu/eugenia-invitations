@@ -1,11 +1,10 @@
-import Button from "@/components/Button";
 import React from "react";
 
 const InvitationRow = ({ invitation, onRowClick }) => {
   return (
     <tr
       onClick={() => onRowClick(invitation)}
-      className="border-0 border-b-2 border-b-slate-200 text-sm"
+      className="border-0 border-b-2 border-b-slate-200 text-sm hover:cursor-pointer hover:bg-slate-300"
     >
       <td>{invitation.host_name}</td>
       <td>
@@ -19,26 +18,6 @@ const InvitationRow = ({ invitation, onRowClick }) => {
         {new Intl.DateTimeFormat("en-EN", {
           dateStyle: "full",
         }).format(new Date(new Date(invitation.expiration_date)))}
-      </td>
-      <td className="flex gap-1 justify-center items-center py-2">
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log("xd");
-          }}
-          className="text-xs rounded-md"
-        >
-          Edit
-        </Button>
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log("xd");
-          }}
-          className="text-xs rounded-md"
-        >
-          Delete
-        </Button>
       </td>
     </tr>
   );

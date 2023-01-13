@@ -54,11 +54,12 @@ export const createNewInvitation = async (newInvitation) => {
   return data;
 };
 
-export const updateInvitation = async (newInvitation, id) => {
+export const updateInvitation = async (newInvitation) => {
   const response = await fetch(
-    `${API}/invitations/${id}`,
+    `${API}/invitations/${newInvitation.id}`,
     authPutConfig(newInvitation)
   );
+
   const data = await response.json();
 
   if (!response.ok) {

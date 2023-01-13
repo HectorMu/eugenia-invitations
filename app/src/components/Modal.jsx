@@ -19,7 +19,7 @@ const Modal = ({ children }) => {
         opacity: 0,
         animationFillMode: "forwards",
       }}
-      class="fixed  inset-x-0 mt-5 lg:inset-y-0 z-50 overflow-y-auto"
+      class="fixed  inset-0 mt-5 lg:inset-y-0 z-50 overflow-y-scroll"
     >
       {children}
     </motion.div>

@@ -59,6 +59,8 @@ controller.Update = async (req, res) => {
   const { id: claimerId } = req.claims;
   const newInvitation = req.body;
   const { id } = req.params;
+
+  console.log(newInvitation);
   if (!id) {
     return res
       .status(400)
@@ -66,7 +68,7 @@ controller.Update = async (req, res) => {
   }
   try {
     const updateResult = await connection.query(
-      "update invitation set ? where id = ? and fk_user_owner = ?",
+      "update invitation set ? where id = ? && fk_user_owner = ?",
       [newInvitation, id, claimerId]
     );
 

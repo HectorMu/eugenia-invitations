@@ -22,8 +22,6 @@ const InvitationsTable = ({ invitations = [], status }) => {
     10
   );
 
-  console.log(selectedInvitation);
-
   return (
     <>
       <AnimatePresence>
@@ -43,7 +41,6 @@ const InvitationsTable = ({ invitations = [], status }) => {
               <th>Host</th>
               <th>Arrival date</th>
               <th>Expires in</th>
-              <th>Actions</th>
             </tr>
           </thead>
           {status === "error" ? (
