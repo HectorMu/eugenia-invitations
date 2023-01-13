@@ -38,13 +38,13 @@ const InvitationDetail = ({ toggle, invitation: localInvitation }) => {
 
   const toggleEditing = () => {
     setIsEditing((prev) => !prev);
-    // if (isEditing) {
-    //   setForm((prev) => ({
-    //     ...prev,
-    //     ...fetchedInvitation,
-    //     expiration_date: fetchedInvitation.expiration_date.split("T")[0],
-    //   }));
-    // }
+    if (isEditing) {
+      setForm((prev) => ({
+        ...prev,
+        ...fetchedInvitation,
+        expiration_date: fetchedInvitation.expiration_date.split("T")[0],
+      }));
+    }
   };
 
   const { form, register, errors, hasErrors, inputTouched, setForm } = useForm(
