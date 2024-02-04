@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Card = ({ children }) => {
   return (
@@ -8,7 +8,7 @@ bg-gray-100  rounded-xl p-3 shadow-lg"
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

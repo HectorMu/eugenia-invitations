@@ -12,7 +12,8 @@
     "start:app": "npm run dev --workspace=app",
     "start:api": "npm run dev --workspace=api",
     "dev": "start npm run start:api && start npm run start:app",
-    "start": "npm run build:app && npm run start:api"
+    "start": "npm run build:app && npm run start:api",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,15 @@
     "react-redux": "^8.0.5"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.2.0",
+    "@testing-library/user-event": "^14.5.2",
     "autoprefixer": "^10.4.13",
+    "cross-fetch": "^4.0.0",
+    "jsdom": "^24.0.0",
+    "msw": "^2.1.5",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "vite-jsconfig-paths": "^2.0.1",
+    "vitest": "^1.2.2"
   }
 }

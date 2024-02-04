@@ -1,15 +1,15 @@
-import Card from "@/components/Card";
-import React from "react";
-import { Link } from "react-router-dom";
-import { BiHelpCircle } from "react-icons/bi";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
-import Logo from "@/components/Logo";
-import AuthLayout from "@/components/AuthLayout";
-import { useLogin } from "./hooks/useLogin";
+import Card from '@/components/Card'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { BiHelpCircle } from 'react-icons/bi'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
+import Logo from '@/components/Logo'
+import AuthLayout from '@/components/AuthLayout'
+import { useLogin } from './hooks/useLogin'
 
 const Login = () => {
-  const { goToSignup, handleSubmit, isLoading, register } = useLogin();
+  const { goToSignup, handleSubmit, isLoading, register } = useLogin()
 
   return (
     <AuthLayout>
@@ -19,15 +19,15 @@ const Login = () => {
           onSubmit={handleSubmit}
           className="flex flex-col gap-3 w-11/12 mx-auto py-5"
         >
-          <Input {...register("email")} placeholder="Email" />
+          <Input {...register('email')} placeholder="Email" />
           <Input
-            {...register("password")}
+            {...register('password')}
             placeholder="Password"
             type="password"
           />
 
           <Button disabled={isLoading} className="mt-5" type="submit">
-            {isLoading ? "Wait plase..." : "Log in"}
+            {isLoading ? 'Wait please...' : 'Log in'}
           </Button>
 
           <hr className="bg-slate-900 h-[1px]" />
@@ -41,14 +41,14 @@ const Login = () => {
       </Card>
       <div className="flex justify-center mt-3">
         <Link
-          to={"/recover"}
+          to={'/recover'}
           className="hover:text-gray-300 text-white hover:underline flex items-center gap-1"
         >
           <BiHelpCircle /> Recover my account
         </Link>
       </div>
     </AuthLayout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -10,6 +10,7 @@
       "@/pages/*": ["./pages/*"],
       "@/routes/*": ["./routes/*"],
       "@/hooks/*": ["./hooks/*"],
+      "@/mocks/*": ["./mocks/*"],
       "@/helpers/*": ["./helpers/*"],
       "@/services/*": ["./services/*"],
       "@/modals/*": ["./modals/*"],

@@ -1,3 +1,3 @@
 export const API = `${
-  import.meta.env.VITE_API_DOMAIN ?? "http://192.168.1.94:4000"
-}/api`;
+  import.meta.env.VITE_API_DOMAIN ?? 'http://localhost:4000'
+}/api`
