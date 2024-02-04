@@ -34,6 +34,7 @@ describe('Login test suite', () => {
       }))
     })
   })
+
   it('Should mount the component', () => {
     const container = render(
       <TestProviderWrapper>
@@ -127,9 +128,9 @@ describe('Login test suite', () => {
   })
 
   afterEach(() => {
-    const ref = renderHook(() => useToaster())
+    const { result } = renderHook(() => useToaster())
 
-    ref.result.current.toasts.forEach((t) => {
+    result.current.toasts.forEach((t) => {
       toast.remove(t.id)
     })
   })
