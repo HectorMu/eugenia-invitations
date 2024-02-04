@@ -9,21 +9,16 @@ import {
 } from 'vitest'
 
 import Login from './Login.jsx'
-import {
-  render,
-  renderHook,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved
-} from '@testing-library/react'
+import { render, renderHook, screen } from '@testing-library/react'
 
 import userEvent from '@testing-library/user-event'
 import { TestProviderWrapper } from '@/mocks/test_utils.jsx'
+import toast, { useToaster } from 'react-hot-toast'
+
 import {
   TEST_INVALID_CREDENTIALS,
   TEST_VALID_CREDENTIALS
 } from '@/mocks/server.js'
-import toast, { useToaster } from 'react-hot-toast'
 
 describe('Login test suite', () => {
   beforeAll(() => {
@@ -33,8 +28,6 @@ describe('Login test suite', () => {
         matches: false,
         media: query,
         onchange: null,
-        addListener: vi.fn(), // Deprecated
-        removeListener: vi.fn(), // Deprecated
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
         dispatchEvent: vi.fn()
@@ -76,13 +69,7 @@ describe('Login test suite', () => {
 
     expect(await screen.findByText('Loading...')).toBeDefined()
 
-    // screen.debug()
-
     expect(await screen.findByText('Welcome')).toBeDefined()
-
-    // setTimeout(() => {
-    //   expect(screen.getByText('Welcomo')).toBeDefined()
-    // }, 2000)
   })
 
   it('Should not complete log in flow by invalid email', async () => {
