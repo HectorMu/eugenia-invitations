@@ -1,6 +1,6 @@
 import { http } from 'msw'
 import { http, HttpResponse, delay } from 'msw'
-import { TEST_VALID_CREDENTIALS } from '../server'
+import { EXISTING_TEST_EMAIL, TEST_VALID_CREDENTIALS } from '../server'
 
 export const AuthHandlers = [
   http.post('http://localhost:4000/api/login', async ({ request }) => {
@@ -57,26 +57,15 @@ export const AuthHandlers = [
 
     const credentials = await request.json()
 
-    if (!credentials.email.includes('@')) {
+    if (credentials.email === EXISTING_TEST_EMAIL) {
       return new HttpResponse(
         JSON.stringify({
-          message: 'The provided email is not valid.'
+          message: 'An account is using this email already, try another email.'
         }),
         {
           status: 400,
-          statusText: 'The provided email is not valid.'
-        }
-      )
-    }
-
-    if (credentials.email !== TEST_VALID_CREDENTIALS.email) {
-      return new HttpResponse(
-        JSON.stringify({
-          message: 'Wrong credentials, check it out.'
-        }),
-        {
-          status: 400,
-          statusText: 'Wrong credentials, check it out.'
+          statusText:
+            'An account is using this email already, try another email.'
         }
       )
     }

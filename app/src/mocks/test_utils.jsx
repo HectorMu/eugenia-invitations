@@ -8,7 +8,13 @@ export const RouterWrapper = ({ children }) => {
   return <BrowserRouter>{children}</BrowserRouter>
 }
 
-const testQueryClient = new QueryClient()
+const testQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false
+    }
+  }
+})
 
 export const QueryClientWrapper = ({ children }) => {
   return (

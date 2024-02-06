@@ -11,4 +11,6 @@ export const TEST_INVALID_CREDENTIALS = {
   password: '12345678'
 }
 
+export const EXISTING_TEST_EMAIL = 'existing_email_test@gmail.com'
+
 export const server = setupServer(...handlers)

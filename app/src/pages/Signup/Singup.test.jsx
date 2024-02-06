@@ -9,16 +9,26 @@ import {
 } from 'vitest'
 
 import Signup from './Signup.jsx'
-import { render, renderHook, screen, waitFor } from '@testing-library/react'
+import {
+  getByText,
+  render,
+  renderHook,
+  screen,
+  waitFor
+} from '@testing-library/react'
 
 import userEvent from '@testing-library/user-event'
 import { TestProviderWrapper } from '@/mocks/test_utils.jsx'
 import toast, { useToaster } from 'react-hot-toast'
 
 import {
+  EXISTING_TEST_EMAIL,
   TEST_INVALID_CREDENTIALS,
-  TEST_VALID_CREDENTIALS
+  TEST_VALID_CREDENTIALS,
+  server
 } from '@/mocks/server.js'
+import { http } from 'msw'
+import { useQueryClient } from '@tanstack/react-query'
 
 describe('Signup test suite', () => {
   beforeAll(() => {
@@ -110,11 +120,49 @@ describe('Signup test suite', () => {
     expect(screen.getByText('Sign up')).toHaveProperty('disabled', false)
   })
 
+  it('Should receive backend validation errors', async () => {
+    render(
+      <TestProviderWrapper>
+        <Signup />
+      </TestProviderWrapper>
+    )
+
+    const user = userEvent.setup()
+
+    const nameInput = screen.getByPlaceholderText('Name')
+    await user.type(nameInput, 'Name Test Signup')
+
+    const lastNameInput = screen.getByPlaceholderText('Lastname')
+    await user.type(lastNameInput, 'Lastname Test Signup')
+
+    const emailInput = screen.getByPlaceholderText('Email')
+    await user.type(emailInput, EXISTING_TEST_EMAIL)
+
+    const passwordInput = screen.getByPlaceholderText('Password')
+    await user.type(passwordInput, 'match_1234')
+
+    const confirmPasswordInput = screen.getByPlaceholderText('Confirm password')
+    await user.type(confirmPasswordInput, 'match_1234')
+
+    const selectDepartmentInput = await screen.findByRole('combobox')
+
+    await user.selectOptions(selectDepartmentInput, '1')
+
+    expect(screen.getByText('Sign up')).toHaveProperty('disabled', false)
+
+    await user.click(screen.getByText('Sign up'))
+
+    screen.debug()
+  })
+
   afterEach(() => {
     const { result } = renderHook(() => useToaster())
 
     result.current.toasts.forEach((t) => {
       toast.remove(t.id)
     })
+    // const { result: reactQueryResult } = renderHook(() => useQueryClient())
+
+    // reactQueryResult.current.clear()
   })
 })
