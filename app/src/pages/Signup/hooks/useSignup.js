@@ -1,76 +1,79 @@
-import useForm from "@/hooks/useForm";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { SignupService } from "@/services/auth.service";
-import { toast } from "react-hot-toast";
-import useRouter from "@/hooks/useRouter";
-import { getDepartments } from "@/services/department.service";
-import { isEmail } from "@/helpers/helpers";
+import useForm from '@/hooks/useForm'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { SignupService } from '@/services/auth.service'
+import { toast } from 'react-hot-toast'
+import useRouter from '@/hooks/useRouter'
+import { getDepartments } from '@/services/department.service'
+import { isEmail } from '@/helpers/helpers'
 
 export const useSignup = () => {
-  const { navigate } = useRouter();
+  const { navigate } = useRouter()
 
   const { data: departments, status: deparmentsStatus } = useQuery({
     queryFn: getDepartments,
-    queryKey: ["departments"],
-  });
+    queryKey: ['departments']
+  })
 
   const { form, register, errors, hasErrors } = useForm(
     {
-      email: "",
-      name: "",
-      lastname: "",
-      password: "",
-      confirmPassword: "",
-      fk_department: 0,
+      email: '',
+      name: '',
+      lastname: '',
+      password: '',
+      confirmPassword: '',
+      fk_department: 0
     },
     {
       validate: (fields) => {
-        const errors = {};
+        const errors = {}
+
+        const ObjectValues = Object.values(fields)
 
         if (
-          Object.values(fields).includes("") ||
-          Object.values(fields).includes(0)
+          ObjectValues.includes('') ||
+          ObjectValues.includes(0) ||
+          ObjectValues.includes('0')
         ) {
-          errors.required = "All fields are required";
+          errors.required = 'All fields are required'
         } else if (!isEmail(fields.email)) {
-          errors.email = "The email is not valid";
+          errors.email = 'The email is not valid'
         } else if (fields.password !== fields.confirmPassword) {
-          errors.password = "The passwords don't match";
+          errors.password = "The passwords don't match"
         }
 
-        return errors;
-      },
+        return errors
+      }
     }
-  );
+  )
 
-  const goToLogin = () => navigate("/login");
+  const goToLogin = () => navigate('/login')
 
   const { isLoading, mutateAsync: handleSignup } = useMutation({
     mutationFn: SignupService,
-    mutationKey: ["user-signup"],
-  });
+    mutationKey: ['user-signup']
+  })
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const tLoading = toast.loading("Loading...");
-    const { confirmPassword, ...restOfUser } = form;
+    e.preventDefault()
+    const tLoading = toast.loading('Loading...')
+    const { confirmPassword, ...restOfUser } = form
     try {
       if (hasErrors)
-        return toast.error("Check all your fields", { id: tLoading });
+        return toast.error('Check all your fields', { id: tLoading })
 
-      await handleSignup(restOfUser);
+      await handleSignup(restOfUser)
 
-      toast.success("Now you can Sign in", {
-        id: tLoading,
-      });
+      toast.success('Now you can Sign in', {
+        id: tLoading
+      })
 
-      navigate("/login");
+      navigate('/login')
     } catch (error) {
       toast.error(error.message, {
-        id: tLoading,
-      });
+        id: tLoading
+      })
     }
-  };
+  }
 
   return {
     goToLogin,
@@ -80,6 +83,6 @@ export const useSignup = () => {
     deparmentsStatus,
     errors,
     register,
-    hasErrors,
-  };
-};
+    hasErrors
+  }
+}

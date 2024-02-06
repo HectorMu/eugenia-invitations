@@ -35,6 +35,7 @@ export const useLogin = () => {
 
       dispatch(storeLogin(response.SessionData))
     } catch (error) {
+      console.log(error)
       toast.error(error.message, {
         id: tLoading
       })
