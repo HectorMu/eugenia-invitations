@@ -97,8 +97,6 @@ describe('Signup test suite', () => {
 
     const formAlertTextContent = screen.getByRole('alert').textContent
 
-    screen.debug()
-
     expect(formAlertTextContent).toContain("The passwords don't match")
 
     await user.clear(passwordInput)
@@ -108,8 +106,6 @@ describe('Signup test suite', () => {
     await user.type(confirmPasswordInput, 'match_123456')
 
     expect(formAlertTextContent).toContain('')
-
-    console.log(screen.getByText('Sign up'))
 
     expect(screen.getByText('Sign up')).toHaveProperty('disabled', false)
   })
